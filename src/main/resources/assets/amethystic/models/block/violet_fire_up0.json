@@ -1,0 +1,7 @@
+{
+    "parent": "amethystic:block/violet_fire_up",
+    "textures": {
+        "particle": "amethystic:blocks/violet_fire_layer_0",
+        "fire": "amethystic:blocks/violet_fire_layer_0"
+    }
+}

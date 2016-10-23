@@ -1,0 +1,7 @@
+{
+    "parent": "amethystic:block/ender_fire_up",
+    "textures": {
+        "particle": "amethystic:blocks/ender_fire_layer_1",
+        "fire": "amethystic:blocks/ender_fire_layer_1"
+    }
+}

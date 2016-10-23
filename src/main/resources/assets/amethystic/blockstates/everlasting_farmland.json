@@ -1,0 +1,12 @@
+{
+    "variants": {
+        "moisture=0": { "model": "amethystic:everlasting_farmland_dry" },
+        "moisture=1": { "model": "amethystic:everlasting_farmland_dry" },
+        "moisture=2": { "model": "amethystic:everlasting_farmland_dry" },
+        "moisture=3": { "model": "amethystic:everlasting_farmland_dry" },
+        "moisture=4": { "model": "amethystic:everlasting_farmland_dry" },
+        "moisture=5": { "model": "amethystic:everlasting_farmland_dry" },
+        "moisture=6": { "model": "amethystic:everlasting_farmland_dry" },
+        "moisture=7": { "model": "amethystic:everlasting_farmland_moist" }
+    }
+}

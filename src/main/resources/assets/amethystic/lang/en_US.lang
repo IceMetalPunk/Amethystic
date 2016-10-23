@@ -1,0 +1,63 @@
+itemGroup.amethystic=Amethystic
+
+item.amethyst.name=Amethyst
+item.amethyst_axe.name=Amethyst Axe
+item.amethyst_hoe.name=Amethyst Hoe
+item.amethyst_pickaxe.name=Amethyst Pickaxe
+item.amethyst_shovel.name=Amethyst Shovel
+item.amethyst_sword.name=Amethyst Sword
+item.flint_and_amethyst.name=Flint and Amethyst
+item.amethyst_bucket.name=Amethyst Bucket
+item.amethyst_water_bucket.name=Amethyst Water Bucket
+item.amethyst_lava_bucket.name=Amethyst Lava Bucket
+
+item.amethyst_chestplate.name=Amethyst Chestplate
+item.amethyst_helmet.name=Amethyst Helmet
+item.amethyst_boots.name=Amethyst Boots
+item.amethyst_leggings.name=Amethyst Leggings
+
+item.portkey.name=Portkey
+item.floo_powder.name=Floo Powder
+
+tile.amethyst_ore.name=Amethyst Ore
+tile.amethyst_block.name=Amethyst Block
+tile.violet_flame.name=Violet Flame
+tile.everlasting_farmland.name=Everlasting Farmland
+tile.ender_flame.name=Ender Flame
+
+commands.blocklight.query=Block light at (%d, %d, %d) is %d
+commands.blocklight.test.success=Block light at (%d, %d, %d) is %d, which is between %d and %d
+commands.blocklight.test.failed=Block light at (%d, %d, %d) is %d, which is not between %d and %d
+commands.blocklight.usage=blocklight <test|query> <x> <y> <z> [<min> [<max>]]
+commands.blocklight.test.usage=blocklight test <x> <y> <z> <min> [<max>]
+commands.blocklight.query.usage=blocklight query <x> <y> <z>
+
+commands.skylight.query=Sky light at (%d, %d, %d) is %d
+commands.skylight.test.success=Sky light at (%d, %d, %d) is %d, which is between %d and %d
+commands.skylight.test.failed=Sky light at (%d, %d, %d) is %d, which is not between %d and %d
+commands.skylight.usage=skylight <test|query> <x> <y> <z> [<min> [<max>]]
+commands.skylight.test.usage=skylight test <x> <y> <z> <min> [<max>]
+commands.skylight.query.usage=skylight query <x> <y> <z>
+
+commands.light.query=Light at (%d, %d, %d) is %d
+commands.light.test.success=Light at (%d, %d, %d) is %d, which is between %d and %d
+commands.light.test.failed=Light at (%d, %d, %d) is %d, which is not between %d and %d
+commands.light.usage=light <test|query> <x> <y> <z> [<min> [<max>]]
+commands.light.test.usage=light test <x> <y> <z> <min> [<max>]
+commands.light.query.usage=light query <x> <y> <z>
+
+commands.testforsky.usage=testforsky <x> <y> <z>
+commands.testforsky.success=The block (%d, %d, %d) can see the sky.
+commands.testforsky.failed=The block (%d, %d, %d) cannot see the sky.
+
+commands.tagbiome.usage=tagbiome <selector> [<prefix>]
+commands.tagbiome.success=Successfully tagged the entities with their current biome.
+
+commands.cleartags.usage=cleartags <selector> [<prefix>]
+commands.cleartags.success=Successfully cleared %d tags from %d entities
+commands.cleartags.notags=No matching tags found
+commands.cleartags.noentity=No matching entities found
+
+commands.testforchat.usage=testforchat <selector> <clear?> [<message...>]
+commands.testforchat.success=Found matching chat text.
+commands.testforchat.failed=Couldn't find matching chat text.
