@@ -3,15 +3,25 @@
  * -Amethyst Beacon Base
  * --> Provides negative effects instead of positive ones
  * -Amethyst Enchanting
- * --> Using amethyst instead of lapis gives better enchantments for cheaper, but with chance of curses as wel
+ * --> Using amethyst instead of lapis gives better enchantments for cheaper, but with chance of curses as well
+ * --> Means I need to add curses to this 1.10.2 version...
+ * -Spawn Linker
+ * --> Moves spawners for durability, but new placed spawners will hurt you each time they trigger
+ * --> Durability taken after placing spawner, not when picking up
+ * --> Full spawn linker can't pick up another
+ * --> If the placer is not on the server, the spawner won't activate at all
  * -Floo Teleportation
- * --> Portkeys store a single coordinate destination
- * --> Floo Powder creates ender-blue Ender Flames, which die in a short time
- * --> ^Walking into Ender Flames with a marked Portkey in your hand teleports you to the Portkey's destination
+ * --> !Portkeys store a single coordinate destination - DONE!
+ * --> !Floo Powder creates ender-blue Ender Flames, which die in a short time - DONE!
+ * --> ?Walking into Ender Flames with a marked Portkey in your hand teleports you to the Portkey's destination - BUGGY?
  * ----> It also extinguishes the flame and the portkey takes durability
- * --> Main hand takes precedence over offhand, but offhand works if no Portkey in main hand
- * --> Portkey recipe: [" AA", "EAE", " E ", 'E' => ender_eye, 'A' => amethyst]
- * --> Floo Powder recipe: ["PGP", "GAG", "PGP", 'P' => ender_pearl, 'A' => amethyst, 'G' => gunpowder] 
+ * --> !Main hand takes precedence over offhand, but offhand works if no Portkey in main hand - DONE!
+ * --> A Floo Collector teleports item entities in a range to the location of the contained Portkey
+ * ----> Each teleportation takes durability from the portkey and uses 1 Floo Powder
+ * ----> In other words, it has 2 slots, one for Floo Powder and 1 for a single Portkey
+ * --> !Portkey recipe: [" AA", "EAE", " E ", 'E' => ender_eye, 'A' => amethyst] - DONE!
+ * --> !Floo Powder recipe: ["PGP", "GAG", "PGP", 'P' => ender_pearl, 'A' => amethyst, 'G' => gunpowder] - DONE! 
+ * --> Floo Collector recipe: ["FIF", "IAI", "FIF", 'F' => floo_powder, 'I' => iron_ingot, 'A' => amethyst]
  * 
  * COMPLETED:
  *  - !Amethyst tools and armor that can't be enchanted - DONE!
@@ -26,8 +36,7 @@
 
 package com.IceMetalPunk.amethystic;
 
-import com.IceMetalPunk.amethystic.AmethysticBlocks.AmethysticBlockRegistry;
-import com.IceMetalPunk.amethystic.AmethysticItems.AmethysticItemRegistry;
+import com.IceMetalPunk.amethystic.blocks.AmethysticBlockRegistry;
 import com.IceMetalPunk.amethystic.commands.CommandBlockLight;
 import com.IceMetalPunk.amethystic.commands.CommandClearTags;
 import com.IceMetalPunk.amethystic.commands.CommandLight;
@@ -36,6 +45,7 @@ import com.IceMetalPunk.amethystic.commands.CommandTagBiome;
 import com.IceMetalPunk.amethystic.commands.CommandTestForChat;
 import com.IceMetalPunk.amethystic.commands.CommandTestForSky;
 import com.IceMetalPunk.amethystic.events.AmethysticEventHandler;
+import com.IceMetalPunk.amethystic.items.AmethysticItemRegistry;
 import com.IceMetalPunk.amethystic.worldGen.AmethysticWorldGenerator;
 
 import net.minecraft.init.Items;
@@ -72,8 +82,8 @@ public class Amethystic {
 
 	// Tool materials
 	public static ToolMaterial AMETHYST_MATERIAL = EnumHelper.addToolMaterial("AMETHYST", 3, 1561, 8.0f, 3.0f, 0);
-	public static ArmorMaterial AMETHYST_ARMOR_MATERIAL = EnumHelper.addArmorMaterial("AMETHYST", "amethystic:amethyst", 33, new int[] {
-			3, 6, 8, 3 }, 0, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 2.0f);
+	public static ArmorMaterial AMETHYST_ARMOR_MATERIAL = EnumHelper.addArmorMaterial("AMETHYST", "amethystic:amethyst",
+			33, new int[] { 3, 6, 8, 3 }, 0, SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND, 2.0f);
 
 	// Registries
 	public static AmethysticItemRegistry items = new AmethysticItemRegistry();
@@ -101,20 +111,27 @@ public class Amethystic {
 		// Crafting recipes
 		GameRegistry.addRecipe(new ItemStack(items.AMETHYST_BLOCK), "AAA", "AAA", "AAA", 'A', items.AMETHYST);
 
-		GameRegistry.addRecipe(new ItemStack(items.AMETHYST_AXE), "AA", "AS", " S", 'A', items.AMETHYST, 'S', Items.STICK);
-		GameRegistry.addRecipe(new ItemStack(items.AMETHYST_HOE), "AA", " S", " S", 'A', items.AMETHYST, 'S', Items.STICK);
-		GameRegistry.addRecipe(new ItemStack(items.AMETHYST_PICKAXE), "AAA", " S ", " S ", 'A', items.AMETHYST, 'S', Items.STICK);
-		GameRegistry.addRecipe(new ItemStack(items.AMETHYST_SHOVEL), "A", "S", "S", 'A', items.AMETHYST, 'S', Items.STICK);
-		GameRegistry.addRecipe(new ItemStack(items.AMETHYST_SWORD), "A", "A", "S", 'A', items.AMETHYST, 'S', Items.STICK);
-		GameRegistry.addShapelessRecipe(new ItemStack(items.FLINT_AND_AMETHYST), new Object[] { Items.FLINT,
-				items.AMETHYST });
+		GameRegistry.addRecipe(new ItemStack(items.AMETHYST_AXE), "AA", "AS", " S", 'A', items.AMETHYST, 'S',
+				Items.STICK);
+		GameRegistry.addRecipe(new ItemStack(items.AMETHYST_HOE), "AA", " S", " S", 'A', items.AMETHYST, 'S',
+				Items.STICK);
+		GameRegistry.addRecipe(new ItemStack(items.AMETHYST_PICKAXE), "AAA", " S ", " S ", 'A', items.AMETHYST, 'S',
+				Items.STICK);
+		GameRegistry.addRecipe(new ItemStack(items.AMETHYST_SHOVEL), "A", "S", "S", 'A', items.AMETHYST, 'S',
+				Items.STICK);
+		GameRegistry.addRecipe(new ItemStack(items.AMETHYST_SWORD), "A", "A", "S", 'A', items.AMETHYST, 'S',
+				Items.STICK);
+		GameRegistry.addShapelessRecipe(new ItemStack(items.FLINT_AND_AMETHYST),
+				new Object[] { Items.FLINT, items.AMETHYST });
 
 		GameRegistry.addRecipe(new ItemStack(items.AMETHYST_HELMET), "AAA", "A A", 'A', items.AMETHYST);
 		GameRegistry.addRecipe(new ItemStack(items.AMETHYST_LEGGINGS), "AAA", "A A", "A A", 'A', items.AMETHYST);
 		GameRegistry.addRecipe(new ItemStack(items.AMETHYST_CHESTPLATE), "A A", "AAA", "AAA", 'A', items.AMETHYST);
 		GameRegistry.addRecipe(new ItemStack(items.AMETHYST_BOOTS), "A A", "A A", 'A', items.AMETHYST);
-		GameRegistry.addRecipe(new ItemStack(items.FLOO_POWDER, 8), "PGP", "GAG", "PGP", 'A', items.AMETHYST, 'P', Items.ENDER_PEARL, 'G', Items.GUNPOWDER);
-		GameRegistry.addRecipe(new ItemStack(items.PORTKEY), " A ", "AEA", " S ", 'A', items.AMETHYST, 'E', Items.ENDER_EYE, 'S', Items.STICK);
+		GameRegistry.addRecipe(new ItemStack(items.FLOO_POWDER, 8), "PGP", "GAG", "PGP", 'A', items.AMETHYST, 'P',
+				Items.ENDER_PEARL, 'G', Items.GUNPOWDER);
+		GameRegistry.addRecipe(new ItemStack(items.PORTKEY), " A ", "AEA", " S ", 'A', items.AMETHYST, 'E',
+				Items.ENDER_EYE, 'S', Items.STICK);
 
 		// Smelting recipes
 		GameRegistry.addSmelting(blocks.AMETHYST_ORE, new ItemStack(items.AMETHYST, 1), 2);

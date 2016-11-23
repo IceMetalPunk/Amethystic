@@ -12,7 +12,7 @@ import java.util.UUID;
 import javax.annotation.Nullable;
 
 import com.IceMetalPunk.amethystic.Amethystic;
-import com.IceMetalPunk.amethystic.AmethysticItems.ItemAmethystArmor;
+import com.IceMetalPunk.amethystic.items.ItemAmethystArmor;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockNewLog;

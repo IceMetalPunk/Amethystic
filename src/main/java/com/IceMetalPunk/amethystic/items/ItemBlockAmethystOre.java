@@ -1,9 +1,8 @@
-package com.IceMetalPunk.amethystic.AmethysticItems;
+package com.IceMetalPunk.amethystic.items;
 
 import com.IceMetalPunk.amethystic.Amethystic;
 
 import net.minecraft.item.ItemBlock;
-import net.minecraftforge.oredict.OreDictionary;
 
 public class ItemBlockAmethystOre extends ItemBlock {
 

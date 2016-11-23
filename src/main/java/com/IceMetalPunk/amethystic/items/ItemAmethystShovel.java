@@ -1,4 +1,4 @@
-package com.IceMetalPunk.amethystic.AmethysticItems;
+package com.IceMetalPunk.amethystic.items;
 
 import com.IceMetalPunk.amethystic.Amethystic;
 

@@ -1,4 +1,4 @@
-package com.IceMetalPunk.amethystic.AmethysticItems;
+package com.IceMetalPunk.amethystic.items;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -43,6 +43,8 @@ public class AmethysticItemRegistry {
 
 	public static Item FLOO_POWDER = new ItemFlooPowder();
 	public static Item PORTKEY = new ItemPortkey();
+
+	public static Item PLACED_SPAWNER = new ItemBlockPlacedSpawner();
 
 	// Ores list
 	public static HashMap<String, Item> oreList = new HashMap<String, Item>();
@@ -92,6 +94,9 @@ public class AmethysticItemRegistry {
 		GameRegistry.register(PORTKEY);
 		itemList.add(PORTKEY);
 
+		GameRegistry.register(PLACED_SPAWNER);
+		itemList.add(PLACED_SPAWNER);
+
 		// Register ores
 		for (Entry e : oreList.entrySet()) {
 			OreDictionary.registerOre((String) e.getKey(), (Item) e.getValue());
@@ -118,8 +123,7 @@ public class AmethysticItemRegistry {
 		for (Item i : itemList) {
 			if (i instanceof ItemBlock) {
 				registerModel(i, ((ItemBlock) i).block.getRegistryName());
-			}
-			else {
+			} else {
 				registerModel(i, i.getRegistryName());
 			}
 		}
